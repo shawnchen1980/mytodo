@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="">
+<style type="text/css">
+	#result{
+		box-sizing: border-box;
+		width: 100px;
+		height:100px;
+		background-color: gray;
+	}
+</style>
+<script type="text/javascript">
+	alert("hello1")
+	
+	var item=document.getElementById("result");
+	console.log(item)
+	//alert(item.childNodes[0].nodeValue)
+	//alert("hello")
+	//item.setAttribute("style","background-color:red")
+	function createVideoControls() {
+		var vids = document.getElementsByTagName('video');
+		for (var i = 0 ; i < vids.length ; i++) {
+		addControls( vids[i] );
+		}
+	}
+	function addControls( vid ) {
+		vid.removeAttribute('controls');
+		vid.height = vid.videoHeight;
+		vid.width = vid.videoWidth;
+		vid.parentNode.style.height = vid.videoHeight + 'px';
+
+		vid.parentNode.style.width = vid.videoWidth + 'px';
+		var controls = document.createElement('div');
+		controls.setAttribute('class','controls');
+		var play = document.createElement('button');
+		play.setAttribute('title','Play');
+		play.innerHTML = '&#x25BA;';
+		controls.appendChild(play);
+		vid.parentNode.insertBefore(controls, vid.nextSibling);
+		play.onclick = function () {
+			if (vid.ended) {
+			vid.currentTime = 0;
+			}
+			if (vid.paused) {
+			vid.play();
+			} else {
+			vid.pause();
+			}
+		};
+		vid.addEventListener('play', function () {
+			play.innerHTML = '&#x2590;&#x2590;';
+			play.setAttribute('paused', true);
+			}, false);
+		vid.addEventListener('pause', function () {
+			play.removeAttribute('paused');
+			play.innerHTML = '&#x25BA;';
+			}, false);
+		vid.addEventListener('ended', function () {
+			vid.pause();
+			}, false);
+			}
+		window.onload = function() {
+			createVideoControls();
+			}
+</script>
+<body>
+<h2>This is a title</h2>
+<ul>
+	<li><a href="#" title="red title" onclick="setTitle(this);return false">red</a></li>
+
+</ul>
+<h3>this is the result</h3>
+<svg id="mysvgexample" height="200" width="300" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
+<rect id="myrectangle" width="200" height="100" fill="red" x="20" y="20" />
+</svg>
+<details>
+<summary>Show/hide me</summary>
+<p>You can see this when expanded<p>
+</details>
+<input type="email" name="haha" pattern="[0-9][A-Z]{3}" required>
+<input type="url" name="haha">
+<div id='result' style="background-color: red">something<h2>the h2</h2></div>
+<video src="abc.mp4" controls></video>
+<script type="text/javascript">
+	sayHello()
+</script>
+<script type="text/javascript">
+	
+	function setTitle(item){
+		document.getElementById("result").childNodes[0].nodeValue=item.getAttribute("title")
+	}
+	function sayHello(){
+		alert("hello world")
+	}
+	var item=document.getElementById("result");
+	//alert(item.childNodes[0].nodeValue)
+	item.setAttribute("style","background-color:blue")
+</script>
+
+</body>
+</html>
